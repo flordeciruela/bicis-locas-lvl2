@@ -1,43 +1,47 @@
+//Obteniendo el valor de los elementos del document:
 var name = document.getElementById('name');
 var lastname = document.getElementById('lastname');
 var email = document.getElementById('input-email');
 var password = document.getElementById('input-password');
-var selector = document.getElementById('selector');
-var div = document.getElementsByClassName('name-container');
+var selector = document.getElementById("select");
+var div = document.getElementsByClassName('input-box');
+var spans = document.getElementsByTagName('span');
 
 function validateForm(){
-	/* Escribe tú código aquí */
-//Obteniendo el valor de los elementos del document:
 //tooltip
-//Declarando expresiones regulares :
-  var vUsernames = /^([A-ZÁ-Ú]{1}[a-zá-úA-ZÁ-Ú]+[\s]*)+$/g;
-  var vEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+	var vUsernames = /^([A-ZÁ-Ú]{1}[a-zá-úA-ZÁ-Ú]+[\s]*)+$/g;
+	var vEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if(!vUsernames.test(name.value)) { //Validando nombre:
-        //alert("ERROR: Ingrese nombre (sólo letras y primera letra mayúscula).");
-				var span = document.createElement("span");
-				span.appendChild(document.createTextNode("ERROR: Ingrese nombre"));
-				span.setAttribute("class","input-box");
-				div[0].appendChild(document.createTextNode(span));
+			var spanName = document.createElement("span");
+			spanName.innerHTML= "Ingrese nombre (sólo letras y primera letra mayúscula)";
+			div[0].appendChild(spanName);
+  	}
 
-    } else if(!/^([A-ZÁ-Ú]{1}[a-zá-úA-ZÁ-Ú]+[\s]*)+$/g.test(lastname)) { //Validando apellido:
-        alert("ERROR: Ingrese apellido (sólo letras y primera letra mayúscula).");
+		if(!vUsernames.test(lastname.value)) { //Validando apellido:
+			var spanLName = document.createElement("span");
+			spanLName.innerHTML= "Ingrese apellido (sólo letras y primera letra mayúscula)";
+			div[1].appendChild(spanLName);
+		}
 
-    } else if(!vEmail.test(email)) { //Validando email:
-        alert("ERROR: Ingrese un email válido.");
+		if(!vEmail.test(email)) { //Validando email:
+			var spanEmail = document.createElement("span");
+			spanEmail.innerHTML= "Ingrese un email válido";
+			div[2].appendChild(spanEmail);
+		}
 
-    } else if(password == "123456" || password == "098754" || password === "password") { //Validando password:
-        alert("ERROR: Su contraseña no es segura, no puede ser 123456, 098754 o password!");
-
-    } else if(password.length < 6) { //Mínimo 6 caracteres
-        alert("ERROR: Ingrese contraseña (mínimo 6 caracteres).");
-
-    } else if(selector==0) { //Validando selector de bicis:
-        alert("ERROR: No ha seleccionado tipo de bici!");
-
-    }else {
-        alert("Sus datos se enviaron con éxito!!"); //Si datos son válidos enviar y refrescar:
-        document.getElementById('formulario').reset();
+		if(password.value == "123456" || password.value == "098754" || password.value === "password" ||password.value.length < 6 || password.value.length > 10) {
+			var spanPass = document.createElement("span");
+			spanPass.innerHTML= "Ingresar contraseña entre 6 a 10 caracteres (no puede ser 123456, 098754 o password)";
+			div[3].appendChild(spanPass);
     }
+
+		if(selector.value=="0") { //Validando selector de bicis:
+			var spanSelect = document.createElement("span");
+			spanSelect.innerHTML= "Seleccionar tipo de bici";
+			div[4].appendChild(spanSelect);
+    }
+
+		//document.getElementById("form").reset();
 
 }
